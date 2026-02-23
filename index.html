@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu – Restaurant</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@400;600&family=Oswald:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e0e;
+    --card: #141414;
+    --gold: #c8952a;
+    --gold-light: #e8b84b;
+    --red: #c0392b;
+    --white: #f0ece4;
+    --muted: #888;
+    --border: rgba(200,149,42,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Oswald', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1008 50%, #0a0a0a 100%);
+    border-bottom: 2px solid var(--gold);
+    padding: 30px 40px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .logo-block {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .logo-circle {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(200,149,42,0.06);
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .logo-circle::before {
+    content: '🍽';
+    font-size: 28px;
+  }
+
+  .logo-text {
+    font-family: 'Playfair Display', serif;
+  }
+
+  .logo-text .name {
+    font-size: 28px;
+    color: var(--gold-light);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .logo-text .sub {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .bon-appetit {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 42px;
+    color: var(--gold-light);
+    text-align: center;
+    text-shadow: 0 0 30px rgba(200,149,42,0.3);
+    flex: 1;
+  }
+
+  .contact-block {
+    text-align: right;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .contact-block a { color: var(--gold-light); text-decoration: none; }
+  .social { font-size: 12px; letter-spacing: 1px; margin-bottom: 4px; color: var(--gold); }
+
+  /* ─── GRID ─── */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    padding: 0;
+  }
+
+  .column {
+    padding: 24px 20px;
+    border-right: 1px solid var(--border);
+  }
+  .column:last-child { border-right: none; }
+
+  /* ─── SECTION ─── */
+  .section { margin-bottom: 28px; }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--gold);
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: var(--red);
+  }
+
+  /* ─── ITEM ─── */
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 7px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted rgba(255,255,255,0.06);
+  }
+
+  .item:last-child { border-bottom: none; }
+
+  .item-name {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--white);
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+  }
+
+  .item-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.3;
+    margin-top: 1px;
+  }
+
+  .item-name-block { flex: 1; }
+
+  .item-price {
+    font-size: 13px;
+    font-weight: 600;
+    color: #FFD700;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+  }
+
+  /* sub-label item */
+  .item-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+
+  /* highlight item */
+  .item-highlight .item-name {
+    color: var(--gold-light);
+    font-weight: 600;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 14px 40px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    font-size: 12px;
+    color: var(--muted);
+    background: #0a0a0a;
+  }
+
+  @media (max-width: 900px) {
+    .menu-grid { grid-template-columns: repeat(2, 1fr); }
+    .column { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+
+  @media (max-width: 520px) {
+    .menu-grid { grid-template-columns: 1fr; }
+    .header { padding: 20px; }
+    .bon-appetit { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo-block">
+    <div class="logo-circle"></div>
+    <div class="logo-text">
+      <div class="name">NOM du Restaurant</div>
+      <div class="sub">Restaurant </div>
+    </div>
+  </div>
+  <div class="bon-appetit">Bonne Appétit</div>
+  <div class="contact-block">
+    <div class="social">📷 🎵 restau-Boumerdes</div>
+    <a href="tel:0770747401">0555 55 55 55</a><br>
+    <a href="tel:0556119370">0555 55 55 55</a>
+  </div>
+</header>
+
+<!-- MENU GRID -->
+<div class="menu-grid">
+
+  <!-- COL 1: Nos Pizza + Pizza Boat -->
+  <div class="column">
+    <div class="section">
+      <div class="section-title">Nos Pizza</div>
+
+      <div class="item"><div class="item-name-block"><div class="item-name">Margherit</div><div class="item-desc">Sauce Tomate, Fromage</div></div><div class="item-price">350</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Mexicaine</div><div class="item-desc">Sauce Tomate, Piment, Tomate, Poivron, Maïs, Fromage</div></div><div class="item-price">550</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Végétarienne</div><div class="item-desc">Sauce Tomate, Aubergine, Oignons, Courgettes, Poivrons, Fromage, Maïs, Fanda, Champignon</div></div><div class="item-price">600</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Oriental</div><div class="item-desc">Sauce Tomate, Merguez, Olive, Fromage</div></div><div class="item-price">650</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">4 Fromages</div><div class="item-desc">Sauce Tomate, Cheddar, Camembert, Fondue, Mozzarella</div></div><div class="item-price">650</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Marina</div><div class="item-desc">Sauce Tomate, Thon, Fromage</div></div><div class="item-price">700</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Napolitaine</div><div class="item-desc">Sauce Tomate, Anchois, Câpre, Cheddar</div></div><div class="item-price">700</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Chicken</div><div class="item-desc">Sauce Tomate, Poulet, Champignons, Fromage</div></div><div class="item-price">700</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Poulet Fumé</div><div class="item-desc">Sauce Tomate, Poulet Fumé, Champignons, Fromage</div></div><div class="item-price">700</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Taglio</div><div class="item-desc">Sauce Tomate, Steak Haché, Champignons, Fromage</div></div><div class="item-price">700</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Crevettes</div><div class="item-desc">Sauce Tomate, Crevettes, Fromages</div></div><div class="item-price">800</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Fruits de Mer</div><div class="item-desc">Sauce Tomate, Fruits de Mer, Fromages</div></div><div class="item-price">800</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Chef</div><div class="item-desc">Au choix</div></div><div class="item-price">800</div></div>
+      <div class="item item-highlight"><div class="item-name-block"><div class="item-name">special</div></div><div class="item-price">1000</div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Pizza Boat</div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Fromage</div></div><div class="item-price">400</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Végétarienne</div></div><div class="item-price">400</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Poulet Fumé</div></div><div class="item-price">450</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Poulet</div></div><div class="item-price">450</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Viande</div></div><div class="item-price">500</div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Supplément</div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Crème Fraîche</div></div><div class="item-price">100</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Bordure Fromage</div></div><div class="item-price">200</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Ingrédient</div></div><div class="item-price">200</div></div>
+    </div>
+  </div>
+
+  <!-- COL 2: Panuozzo -->
+  <div class="column">
+    <div class="section">
+      <div class="section-title">Panuozzo</div>
+
+      <div class="item"><div class="item-name-block"><div class="item-name">Panuozzo Poulet</div><div class="item-desc">Salade, Tomate, Sauce Fromagère, Poulet, Mozzarella, Cheddar</div></div><div class="item-price">650</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Panuozzo Viande</div><div class="item-desc">Salade, Tomate, Sauce Fromagère, Viande, Mozzarella, Cheddar</div></div><div class="item-price">750</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Panuozzo Mixte</div><div class="item-desc">Salade, Tomate, Sauce Fromagère, Poulet, Viande, Mozzarella, Cheddar</div></div><div class="item-price">800</div></div>
+    </div>
+  </div>
+
+  <!-- COL 3: Sandwiches + Tacos -->
+  <div class="column">
+    <div class="section">
+      <div class="section-title">Nos Sandwiches</div>
+
+      <div class="item"><div class="item-name-block"><div class="item-name">Sandwich Méditerranée</div><div class="item-desc">Poulet Frite, Salade, Tomate, Fromages</div></div><div class="item-price">350</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Sandwich Buffalo</div><div class="item-desc">Viande, Frite, Salade, Tomate, Fromage</div></div><div class="item-price">450</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Sandwich Royale</div><div class="item-desc">Merguez, Frite, Salade, Tomate, Fromage</div></div><div class="item-price">450</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Sandwich Mexicain</div><div class="item-desc">Poulet, Frite, Salade, Tomate, Piment, Fromage</div></div><div class="item-price">450</div></div>
+      <div class="item item-highlight"><div class="item-name-block"><div class="item-name">Sandwich le special`</div><div class="item-desc">Viande, Frite, Salade, 3 fromages, Gratiné + Baguette Tomate</div></div><div class="item-price">750</div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Nos Tacos</div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Tacos Poulet</div></div><div class="item-price">450</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Tacos Viande</div></div><div class="item-price">550</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Tacos Crispy</div></div><div class="item-price">500</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Tacos Mixte</div></div><div class="item-price">650</div></div>
+    </div>
+  </div>
+
+  <!-- COL 4: Cheese Burgers + Paninis -->
+  <div class="column">
+    <div class="section">
+      <div class="section-title">Cheese Burgers</div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Chicken Burger</div></div><div class="item-price">250</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Burger Classique</div></div><div class="item-price">350</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Crispy Chicken</div></div><div class="item-price">350</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Double Chicken</div></div><div class="item-price">450</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Mixta <span class="item-label">(Chicken + Viande)</span></div></div><div class="item-price">500</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Double Viande</div></div><div class="item-price">600</div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Paninis</div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Panini Poulet</div></div><div class="item-price">250</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Panini 3 Fromages</div></div><div class="item-price">250</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Panini Viande</div></div><div class="item-price">300</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Panini Thon</div></div><div class="item-price">250</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Panini Mixte</div></div><div class="item-price">300</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Supplément au choix</div></div><div class="item-price">100</div></div>
+      <div class="item"><div class="item-name-block"><div class="item-name">Gratiné</div></div><div class="item-price">200</div></div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <span>📷 🎵 restau-Boumerdes</span>
+  <span>📞 0555 55 55 55 &nbsp;|&nbsp; 0555 55 55 55</span>
+</footer>
+
+</body>
+</html>
